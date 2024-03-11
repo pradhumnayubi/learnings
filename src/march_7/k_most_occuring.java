@@ -1,36 +1,45 @@
 package march_7;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class k_most_occuring {
+
+    static void solve(int[] arr, int n, int k){
+        HashMap<Integer,Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mp.put(arr[i], mp.getOrDefault(arr[i],0)+1);
+        }
+
+        ArrayList<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(mp.entrySet());
+
+
+        list.sort(new Comparator<Map.Entry<Integer, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                if (o1.getValue() == o2.getValue()) {
+                    return o2.getKey() - o1.getKey();
+                } else return o2.getValue() - o1.getValue();
+            }
+        });
+
+        for (int i = 0; i < k; i++) {
+            System.out.print(list.get(i).getKey()+" ");
+        }
+
+
+
+    }
     public static void main(String[] args) {
-        HashMap<Integer, String> hm1 = new HashMap<>(10);
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
 
-        // Initialization of a HashMap using Generics
-        HashMap<Integer, String> hm2
-                = new HashMap<Integer, String>(2);
+        int[] arr = new int[n];
 
-        // Adding elements to object of HashMap
-        // using put method
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
 
-        // HashMap 1
-        hm1.put(1, "one");
-        hm1.put(2, "two");
-        hm1.put(3, "three");
-
-        // HashMap 2
-        hm2.put(4, "four");
-        hm2.put(5, "five");
-        hm2.put(6, "six");
-
-        // Printing elements of HashMap 1
-        System.out.println("Mappings of HashMap hm1 are : "
-                + hm1);
-
-        // Printing elements of HashMap 2
-        System.out.println("Mapping of HashMap hm2 are : "
-                + hm2);
-
-        hm1.put(1,"seven");
+        int k = sc.nextInt();
+        solve(arr,n,k);
     }
 }
