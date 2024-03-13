@@ -1,6 +1,7 @@
 package Employee_Management;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Department {
 
@@ -28,6 +29,18 @@ public class Department {
         return departmentName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return Objects.equals(departmentId, that.departmentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(departmentId);
+    }
 }
 
 
